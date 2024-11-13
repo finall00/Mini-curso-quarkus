@@ -4,6 +4,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -35,7 +36,8 @@ public class ProdutoResource {
     @Transactional
     @POST
     @Path("/produto")
-    public Response criarProdduto(ProdutoDTO produtoDTO) {
+    public Response criarProdduto(@Valid ProdutoDTO produtoDTO) {
+        
         Produto produto = new Produto(produtoDTO.getNome(), produtoDTO.getDescricao(), produtoDTO.getPreco());
         produto.persist();
 
